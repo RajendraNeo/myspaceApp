@@ -1,0 +1,106 @@
+<div class="row mt-2">
+    <div [ngClass]="createFromToggle ? 'col-md-8':'col-md-12'">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3>Rooms Portal</h3>
+                    <button class="btn btn-primary" (click)="openCreateFrom()">{{createFromToggle? 'Close':'Create New'}}</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Sr No</th>
+                        <th scope="col">Room Name</th>
+                        <th scope="col">Room Location</th>
+                        <th scope="col">Room Seating Capacity</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngIf="isLoader==false">
+                      <tr *ngFor="let room of roomsData; let sr=index">
+                        <th scope="row">{{sr+1}}</th>
+                        <td>{{room.roomName}}</td>
+                        <td>{{room.roomLocation}}</td>
+                        <td>{{room.roomSeatingCapacity}}</td>
+                        <td>{{room.isRoomActive}}</td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-success me-2">Edit</button>
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody *ngIf="isLoader==true">
+                        <tr>
+                            <td colspan="6" class="text-center mt-2">
+                                <div class="spinner-grow text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-secondary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-success" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-danger" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-warning" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-info" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-light" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-dark" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                  </table>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-4" [ngClass]="createFromToggle ? 'd-block':'d-none'">
+        <div class="card">
+            <div class="card-header">
+                <h3>Create Package</h3>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="roomname" class="form-label">Room Name</label>
+                        <input type="text" class="form-control" name="roomName" placeholder="Enter Package Name" id="roomname" [(ngModel)]="roomObj.roomName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="roomLocation" class="form-label">Room Location</label>
+                        <input type="text" class="form-control" name="roomLocation" placeholder="Enter Package Cost" id="roomLocation" [(ngModel)]="roomObj.roomLocation">
+                    </div>
+                    <div class="mb-3">
+                        <label for="roomSeatingCapacity" class="form-label">Room Seating Capacity</label>
+                        <input type="text" class="form-control" name="roomSeatingCapacity" placeholder="Enter Package Description" id="roomSeatingCapacity" [(ngModel)]="roomObj.roomSeatingCapacity">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <label class="form-check-label" for="isRoomActive">Is Active</label>
+                        <input type="checkbox" class="form-check-input" id="isRoomActive" name="isRoomActive"
+                        [(ngModel)]="roomObj.isRoomActive">
+                    </div>
+                    <div class="mb-3 d-flex justify-content-end">
+                       <button class="btn btn-secondary me-3" (click)="resetRoom()">Reset</button>
+                       <button class="btn btn-primary" *ngIf="roomObj.roomId===0" (click)="createRoom()">
+                        <div *ngIf="isLoader" class="spinner-border spinner-border-sm"></div>
+                        Save</button>
+                       <!-- <button class="btn btn-success" *ngIf="roomObj.roomId!==0"  (click)="UpdateRoom()">
+                        <div *ngIf="isLoader" class="spinner-border spinner-border-sm"></div>
+                        Update</button> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

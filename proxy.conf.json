@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+      "target": "https://onlinetestapi.gerasim.in",
+      "secure": true,
+      "changeOrigin": true
+    }
+}
