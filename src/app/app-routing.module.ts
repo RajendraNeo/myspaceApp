@@ -13,6 +13,7 @@ import { ClientlayoutComponent } from './pages/clientlayout/clientlayout.compone
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { RoomsComponent } from './pages/rooms/rooms.component';
 import { BookingComponent } from './pages/booking/booking.component';
+import { LocalstorageComponent } from './localstorage/localstorage.component';
 
 const routes: Routes = [
   {
@@ -69,7 +70,10 @@ const routes: Routes = [
         component:BookingComponent
       }
     ]
-  }
+  },
+  {
+    path:"local-storage",component:LocalstorageComponent
+  },
 ];
 
 @NgModule({

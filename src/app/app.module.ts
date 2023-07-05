@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PackgesComponent } from './pages/packges/packges.component';
@@ -18,6 +18,8 @@ import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard
 import { ShortNamePipe } from './core/pipes/short-name.pipe';
 import { RoomsComponent } from './pages/rooms/rooms.component';
 import { BookingComponent } from './pages/booking/booking.component';
+import { LocalstorageComponent } from './localstorage/localstorage.component';
+import { AllApicallInterceptor } from './core/interceptor/all-apicall.interceptor';
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import { BookingComponent } from './pages/booking/booking.component';
     AdminDashboardComponent,
     ShortNamePipe,
     RoomsComponent,
-    BookingComponent
+    BookingComponent,
+    LocalstorageComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,9 @@ import { BookingComponent } from './pages/booking/booking.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass:AllApicallInterceptor, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

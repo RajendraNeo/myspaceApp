@@ -1,0 +1,161 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Logo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold" aria-current="page">Employee</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col-md-4 border-end">
+            <h4>Employee Details Entry From</h4>
+            <form #form="ngForm">
+                <div class="d-flex align-items-center mb-3">
+                    <div style="width: 35%;">
+                        name : 
+                    </div>
+                    <div style="width: 65%;">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-grow-1 me-2">
+                            <input type="text" name="firstName" class="form-control" [(ngModel)]="empObj.firstName">
+                          </div>
+                          <div class="flex-grow-1">
+                            <input type="text" class="form-control" name="lastName" [(ngModel)]="empObj.lastName">
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <div style="width: 35%;">
+                        Technology :
+                    </div>
+                    <div style="width: 65%;">
+                        <input type="text" name="technology" class="form-control" [(ngModel)]="empObj.technology">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <div style="width: 35%;">
+                        Designation :
+                    </div>
+                    <div style="width: 65%;">
+                        <input type="text" class="form-control" name="designation" [(ngModel)]="empObj.designation">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <div style="width: 35%;">
+                        Skills :
+                    </div>
+                    <div style="width: 65%;">
+                        <select [(ngModel)]="empObj.skill" name="skill" class="form-select" aria-label="Default select example">
+                            <option selected>Select</option>
+                            <option value="One">Angular</option>
+                            <option value="Two">Java</option>
+                            <option value="Three">React Js</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <div style="width: 35%;">
+                        Core Expertise In :
+                    </div>
+                    <div style="width: 65%;">
+                        <input type="text" name="coreExpertise" class="form-control" [(ngModel)]="empObj.coreExpertise">
+                    </div>
+                </div>
+                <div class="d-flex mb-3">
+                    <div style="width: 35%;">
+                        Certification if any :
+                    </div>
+                    <div style="width: 65%;">
+                        <div class="mb-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="yesOptions" id="yes" value="yes" [(ngModel)]="empObj.isCertification">
+                                <label class="form-check-label" for="yes">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="yesOptions" id="no" value="no" [(ngModel)]="empObj.isCertification">
+                                <label class="form-check-label" for="no">No</label>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" [disabled]="empObj.isCertification=='no' || empObj.isCertification==''" name="isCertification">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <div style="width: 35%;">
+                        Company :
+                    </div>
+                    <div style="width: 65%;">
+                        <input type="text" class="form-control" name="company" [(ngModel)]="empObj.company">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="yourSelf" class="form-label">few Line about yourself</label>
+                    <textarea class="form-control" [(ngModel)]="empObj.fewDetails" id="yourSelf" rows="3"></textarea>
+                </div>
+                <div class="mb-3 d-flex justify-content-end">
+                    <button class="btn btn-secondary me-2">Cancel</button>
+                    <button class="btn btn-primary" [disabled]="form.invalid" (click)="onSave()">Save</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h4>Employee List</h4>
+                <div class="d-flex align-items-center">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Select</option>
+                        <option value="name">Name</option>
+                        <option value="technology">Technology</option>
+                        <option value="designation">Designation</option>
+                        <option value="skill">Skill</option>
+                        <option value="core-expertise">Core Expertise</option>
+                        <option value="company">Company</option>
+                    </select>
+                    <input class="form-control ms-2" [(ngModel)]="searchText" type="search" placeholder="Search" aria-label="Search">
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Sr</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Technology</th>
+                    <th scope="col">Designation</th>
+                    <th scope="col">Skills</th>
+                    <th scope="col">Core Expertise</th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of employees; let sr=index">
+                     <td>{{sr+1}}</td>
+                     <td>{{item.firstName}} {{item.lastName}}</td>
+                     <td>{{item.technology}}</td>
+                     <td>{{item.designation}}</td>
+                     <td>{{item.skill}}</td>
+                     <td>{{item.coreExpertise}}</td>
+                     <td>{{item.company}}</td>
+                     <td>
+                        <button class="btn btn-danger me-1">Delete</button>
+                        <button class="btn btn-primary">Edit</button>
+                     </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
